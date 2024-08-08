@@ -55,7 +55,7 @@ if [[ $MODE == "make_weight" ]]; then
         --model-prefix training/JetClassII_Sophon${suffix}/net \
         $dataopts $batchopts \
         --samples-per-epoch ${samples_per_epoch} --samples-per-epoch-val ${samples_per_epoch_val} --num-epochs $epochs --optimizer ranger --gpus 0 \
-        --log-f logs/JetClassII_Sophon${suffix}/make_weight.log \
+        --log-file logs/JetClassII_Sophon${suffix}/make_weight.log \
         "${@:2}"
 
 elif [[ $MODE == "train" ]]; then
@@ -66,7 +66,7 @@ elif [[ $MODE == "train" ]]; then
         --model-prefix training/JetClassII_Sophon${suffix}/net \
         $dataopts $batchopts \
         --samples-per-epoch ${samples_per_epoch} --samples-per-epoch-val ${samples_per_epoch_val} --num-epochs $epochs --optimizer ranger --gpus 0 \
-        --log-f logs/JetClassII_Sophon${suffix}/train.log --tensorboard JetClassII_Sophon${suffix} \
+        --log-file logs/JetClassII_Sophon${suffix}/train.log --tensorboard JetClassII_Sophon${suffix} \
         "${@:2}"
 
 elif [[ $MODE == "convert" ]]; then

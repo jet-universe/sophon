@@ -2,7 +2,7 @@
 
 [[Paper]](https://arxiv.org/abs/2405.12972) [[Dataset]]() (TBA) [[Model]](https://huggingface.co/datasets/jet-universe/sophon) [[Colab]](https://colab.research.google.com/github/jet-universe/sophon/blob/main/notebooks/Interacting_with_JetClassII_and_Sophon.ipynb)
 
-**Sophon** (Signature-Oriented Pre-training for Heavy-resonance ObservatioN) is a proposed method for developing foundational AI models tailored for future usage in LHC experimental analyses. The approach focuses on pre-training a model using a comprehensive jet dataset designed to capture extensive jet signatures.
+**Sophon** (Signature-Oriented Pre-training for Heavy-resonance ObservatioN) is a proposed method for developing foundation AI models tailored for future usage in LHC experimental analyses. The approach focuses on pre-training a model using a comprehensive jet dataset designed to capture extensive jet signatures.
 
 This work introduces:
 1. The **JetClass-II** dataset: a large-scale and comprehensive large-*R* jet dataset.
@@ -167,7 +167,7 @@ Download the JetClass-II dataset from [[Zenodo]]() (TBA) and ensure that all ROO
 ./datasets/JetClassII/Pythia/{Res2P,Res34P,QCD}_*.root
 ```
 
-The required dataset files for training and evaluation is shown in the [table](#data-packing).
+The required data files for training and validation is shown in the [table](#data-packing). The test data is not used in this work.
 
 ### Training
 

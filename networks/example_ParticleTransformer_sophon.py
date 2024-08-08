@@ -60,7 +60,7 @@ def get_model(data_config, **kwargs):
         num_classes=None,
         # network configurations
         pair_input_dim=4,
-        use_pre_activation_pair=False,
+        use_pre_activation_pair=True,
         embed_dims=[128, 512, 128],
         pair_embed_dims=[64, 64, 64],
         num_heads=8,
