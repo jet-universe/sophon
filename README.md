@@ -49,7 +49,7 @@ Every 100k entries (jets) are stored in a Parquet file. A complete view of the J
 
 Use [[Colab]](https://colab.research.google.com/github/jet-universe/sophon/blob/main/notebooks/Interacting_with_JetClassII_and_Sophon.ipynb) to inspect and visualize data in JetClass-II.
 
-Here are some visualization of jets marked with the top-5 probability scores intepreted by the Sophon model (see the Sophon model's seciton below).
+Here are some visualizations of jets marked with the top-5 probability scores interpreted by the Sophon model (see the Sophon model's section below).
 
 ![jetclass2_vis_example](figures/jetclass2_vis_example.png)
 
@@ -110,37 +110,37 @@ The JetClass-II dataset includes the following variables:
 | `jet_tau2`             | float                 | jet's $N$-subjettiness variable $\tau_2$ | ✔️
 | `jet_tau3`             | float                 | jet's $N$-subjettiness variable $\tau_3$ | ✔️
 | `jet_tau4`             | float                 | jet's $N$-subjettiness variable $\tau_4$ | ✔️
-| `jet_label`            | int32_t               | jet's label index in JetClass-II, detailed in the above table | New
+| `jet_label`            | int32_t               | jet's label index in JetClass-II, detailed in the above table | 🆕
 | **For GEN-jet constituent particles** (if a GEN-jet is found matched to a jet) | | | |
-| `genpart_px`           | vector\<float\>       | particle's $p_x$ | New
-| `genpart_py`           | vector\<float\>       | particle's $p_y$ | New
-| `genpart_pz`           | vector\<float\>       | particle's $p_z$ | New
-| `genpart_energy`       | vector\<float\>       | particle's energy | New
-| `genpart_jet_deta`     | vector\<float\>       | difference in pseudorapidity $\eta$ between the particle and the jet (not the GEN-jet) axis | New
-| `genpart_jet_dphi`     | vector\<float\>       | difference in azimuthal angle $\phi$ between the particle and the jet (not the GEN-jet) axis | New
-| `genpart_x`            | vector\<float\>       | $x$ coordinate of the particle’s production vertex, in mm | New
-| `genpart_y`            | vector\<float\>       | $y$ coordinate of the particle’s production vertex, in mm | New
-| `genpart_z`            | vector\<float\>       | $z$ coordinate of the particle’s production vertex, in mm | New
-| `genpart_t`            | vector\<float\>       | $t$ coordinate of the particle’s production vertex, in mm/c | New
-| `genpart_pid`          | vector\<int32_t\>     | particle’s PDGID | New
+| `genpart_px`           | vector\<float\>       | particle's $p_x$ | 🆕
+| `genpart_py`           | vector\<float\>       | particle's $p_y$ | 🆕
+| `genpart_pz`           | vector\<float\>       | particle's $p_z$ | 🆕
+| `genpart_energy`       | vector\<float\>       | particle's energy | 🆕
+| `genpart_jet_deta`     | vector\<float\>       | difference in pseudorapidity $\eta$ between the particle and the jet (not the GEN-jet) axis | 🆕
+| `genpart_jet_dphi`     | vector\<float\>       | difference in azimuthal angle $\phi$ between the particle and the jet (not the GEN-jet) axis | 🆕
+| `genpart_x`            | vector\<float\>       | $x$ coordinate of the particle’s production vertex, in mm | 🆕
+| `genpart_y`            | vector\<float\>       | $y$ coordinate of the particle’s production vertex, in mm | 🆕
+| `genpart_z`            | vector\<float\>       | $z$ coordinate of the particle’s production vertex, in mm | 🆕
+| `genpart_t`            | vector\<float\>       | $t$ coordinate of the particle’s production vertex, in mm/c | 🆕
+| `genpart_pid`          | vector\<int32_t\>     | particle's PDGID | 🆕
 | **For GEN-jet** (if matched to a jet) | | | |
-| `genjet_pt`            | float                 | GEN-jet's transverse momentum $p_{\rm T}$ | New
-| `genjet_eta`           | float                 | GEN-jet's pseudorapidity $\eta$ | New
-| `genjet_phi`           | float                 | GEN-jet's azimuthal angle $\phi$ | New
-| `genjet_energy`        | float                 | GEN-jet's energy | New
-| `genjet_sdmass`        | float                 | GEN-jet's soft-drop mass | New
-| `genjet_nparticles`    | int32_t               | number of GEN-jet constituent particles | New
+| `genjet_pt`            | float                 | GEN-jet's transverse momentum $p_{\rm T}$ | 🆕
+| `genjet_eta`           | float                 | GEN-jet's pseudorapidity $\eta$ | 🆕
+| `genjet_phi`           | float                 | GEN-jet's azimuthal angle $\phi$ | 🆕
+| `genjet_energy`        | float                 | GEN-jet's energy | 🆕
+| `genjet_sdmass`        | float                 | GEN-jet's soft-drop mass | 🆕
+| `genjet_nparticles`    | int32_t               | number of GEN-jet constituent particles | 🆕
 | **For selected truth particles** | | | |
 | `aux_genpart_pt`       | vector\<float\>       | selected truth particles' $p_{\rm T}$ | ✔️ (different rules to select truth particles)
 | `aux_genpart_eta`      | vector\<float\>       | selected truth particles' $\eta$ | ✔️ (different rules to select truth particles)
 | `aux_genpart_phi`      | vector\<float\>       | selected truth particles' $\phi$ | ✔️ (different rules to select truth particles)
 | `aux_genpart_mass`     | vector\<float\>       | selected truth particles' mass | ✔️ (different rules to select truth particles)
-| `aux_genpart_pid`      | vector\<int32_t\>     | selected truth particles' PDGID | New
-| `aux_genpart_isResX`   | vector\<bool\>        | if the particle is the initial resonance $X$ | New
-| `aux_genpart_isResY`   | vector\<bool\>        | if the particle is the secondary resonance $Y$ | New
-| `aux_genpart_isResDecayProd` | vector\<bool\>  | if the particle is the direct decay product (parton and lepton) from $X$ and $Y$ | New
-| `aux_genpart_isTauDecayProd` | vector\<bool\>  | if the particle is the subsequent decay product of tau leptons | New
-| `aux_genpart_isQcdParton`    | vector\<bool\>  | if the particle is the parton with $p_{\rm T}$ > 5 GeV stored in the QCD jet case | New
+| `aux_genpart_pid`      | vector\<int32_t\>     | selected truth particles' PDGID | 🆕
+| `aux_genpart_isResX`   | vector\<bool\>        | if the particle is the initial resonance $X$ | 🆕
+| `aux_genpart_isResY`   | vector\<bool\>        | if the particle is the secondary resonance $Y$ | 🆕
+| `aux_genpart_isResDecayProd` | vector\<bool\>  | if the particle is the direct decay product (parton and lepton) from $X$ and $Y$ | 🆕
+| `aux_genpart_isTauDecayProd` | vector\<bool\>  | if the particle is the subsequent decay product of tau leptons | 🆕
+| `aux_genpart_isQcdParton`    | vector\<bool\>  | if the particle is the parton with $p_{\rm T}$ > 5 GeV stored in the QCD jet case | 🆕
 
 </details>
 
