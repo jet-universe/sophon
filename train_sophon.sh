@@ -29,22 +29,22 @@ samples_per_epoch_val=$((2500 * 1024))
 
 dataconfig="data/JetClassII/JetClassII_full.yaml"
 modelopts="networks/example_ParticleTransformer_sophon.py --use-amp -o num_classes 188 -o fc_params [(512,0.1)]"  # enlarge FC layers
-dataopts="--num-workers 5 --fetch-step 0.01"
+dataopts="--num-workers 5 --fetch-step 1.0 --data-split-num 200"
 batchopts="--batch-size 512 --start-lr 5e-4"  # remember to scale LR if using the DDP mode
 
 # set the train/eval dataset
 # for training: {Res2P: 0000-0199, Res34P: 0000-0859, QCD: 0000-0279}; for eval: {Res2P: 0200-0249, Res34P: 0860-1074, QCD: 0280-0349}
-trainset_res2p=$(for i in $(seq -w 0 199); do echo -n "Res2P:${DATADIR}/Pythia/Res2P_0$i.root "; done)
-trainset_res34p=$(for i in $(seq -w 0 859); do echo -n "Res34P:${DATADIR}/Pythia/Res34P_0$i.root "; done)
-trainset_qcd=$(for i in $(seq -w 0 279); do echo -n "QCD:${DATADIR}/Pythia/QCD_0$i.root "; done)
+trainset_res2p=$(for i in $(seq -w 0000 0199); do echo -n "Res2P:${DATADIR}/Pythia/Res2P_$i.parquet "; done)
+trainset_res34p=$(for i in $(seq -w 0000 0859); do echo -n "Res34P:${DATADIR}/Pythia/Res34P_$i.parquet "; done)
+trainset_qcd=$(for i in $(seq -w 0000 0279); do echo -n "QCD:${DATADIR}/Pythia/QCD_$i.parquet "; done)
 
-valset_res2p=$(for i in $(seq -w 200 249); do echo -n "${DATADIR}/Pythia/Res2P_0$i.root "; done)
-valset_res34p=$(for i in $(seq -w 860 1074); do echo -n "${DATADIR}/Pythia/Res34P_$i.root "; done)
-valset_qcd=$(for i in $(seq -w 280 349); do echo -n "${DATADIR}/Pythia/QCD_0$i.root "; done)
+valset_res2p=$(for i in $(seq -w 0200 0249); do echo -n "${DATADIR}/Pythia/Res2P_$i.parquet "; done)
+valset_res34p=$(for i in $(seq -w 0860 1074); do echo -n "${DATADIR}/Pythia/Res34P_$i.parquet "; done)
+valset_qcd=$(for i in $(seq -w 0280 0349); do echo -n "${DATADIR}/Pythia/QCD_$i.parquet "; done)
 
-allset_res2p=$(for i in $(seq -w 0 249); do echo -n "${DATADIR}/Pythia/Res2P_0$i.root "; done)
-allset_res34p=$(for i in $(seq -w 0 1074); do echo -n "${DATADIR}/Pythia/Res34P_$i.root "; done)
-allset_qcd=$(for i in $(seq -w 0 349); do echo -n "${DATADIR}/Pythia/QCD_0$i.root "; done)
+allset_res2p=$(for i in $(seq -w 0000 0249); do echo -n "${DATADIR}/Pythia/Res2P_$i.parquet "; done)
+allset_res34p=$(for i in $(seq -w 0000 1074); do echo -n "${DATADIR}/Pythia/Res34P_$i.parquet "; done)
+allset_qcd=$(for i in $(seq -w 0000 0349); do echo -n "${DATADIR}/Pythia/QCD_$i.parquet "; done)
 
 # run command
 if [[ $MODE == "make_weight" ]]; then

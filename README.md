@@ -1,8 +1,8 @@
 # Sophon
 
-[[Paper]](https://arxiv.org/abs/2405.12972) [[Dataset]]() (TBA) [[Model]](https://huggingface.co/datasets/jet-universe/sophon) [[Colab]](https://colab.research.google.com/github/jet-universe/sophon/blob/main/notebooks/Interacting_with_JetClassII_and_Sophon.ipynb)
+[[Paper]](https://arxiv.org/abs/2405.12972) [[Dataset]](https://huggingface.co/datasets/jet-universe/jetclass2) [[Model]](https://huggingface.co/datasets/jet-universe/sophon) [[Colab]](https://colab.research.google.com/github/jet-universe/sophon/blob/main/notebooks/Interacting_with_JetClassII_and_Sophon.ipynb)
 
-**Sophon** (Signature-Oriented Pre-training for Heavy-resonance ObservatioN) is a proposed method for developing foundation AI models tailored for future usage in LHC experimental analyses. The approach focuses on pre-training a model using a comprehensive jet dataset designed to capture extensive jet signatures.
+**Sophon** (Signature-Oriented Pre-training for Heavy-resonance ObservatioN) is a method proposed for developing foundation AI models tailored for future usage in LHC experimental analyses. The approach focuses on pre-training a model using a comprehensive jet dataset designed to capture extensive jet signatures.
 
 This work introduces:
 1. The **JetClass-II** dataset: a large-scale and comprehensive large-*R* jet dataset.
@@ -25,24 +25,24 @@ Each part is further subdivided into detailed categories, indicating which parto
 ![jetclass2_table](figures/jetclass2_table.png)
 <!-- <img src="figures/jetclass2_table.png" alt="jetclass2_table" width="200"/> -->
 
-The dataset can be downloaded from [[Zenodo]]() (TBA). The three major parts (**`Res2P`**, **`Res34P`**, and **`QCD`**) are separately packed and can be downloaded individually for ease of use. The sizes of the training sets are 20M, 86M, and 28M entries, respectively. The dataset also includes validation and test sets, with the sizes for training/validation/test following a 4:1:1 ratio.
+The dataset can be downloaded from [[HuggingFace]](https://huggingface.co/datasets/jet-universe/jetclass2). The three major parts (**`Res2P`**, **`Res34P`**, and **`QCD`**) are separately packed and can be downloaded individually for ease of use. The sizes of the training sets are 20M, 86M, and 28M entries, respectively. The dataset also includes validation and test sets, with the sizes for training/validation/test following a 4:1:1 ratio.
 
-### Data packing
+### Data files
 
-Every 100k entries (jets) are stored in a ROOT file, and every 10 (or in a few cases 5) ROOT files are packaged in a tarball. The name of the tarball contains the range of ROOT file indexes. See the table below for the complete dataset.
+Every 100k entries (jets) are stored in a Parquet file. A complete view of the JetClass-II data files are shown in the table below.
 
 
 | Type | File name range | File number | total entries |
 | --- | --- | --- | --- |
-| **`Res2P`, train**  | `Res2P_0000.root`—`Res2P_0199.root`   | **200** | **20M**   |
-| `Res2P`, val    | `Res2P_0200.root`—`Res2P_0249.root`   | 50  | 5M    |
-| `Res2P`, test   | `Res2P_0250.root`—`Res2P_0299.root`   | 50  | 5M    |
-| **`Res34P`, train** | `Res34P_0000.root`—`Res34P_0859.root` | **860** | **86M**   |
-| `Res34P`, val   | `Res34P_0860.root`—`Res34P_1074.root` | 215 | 21.5M |
-| `Res34P`, test  | `Res34P_1075.root`—`Res34P_1289.root` | 215 | 21.5M |
-| **`QCD`, train**    | `QCD_0000.root`—`QCD_0279.root`       | **280** | **28M**   |
-| `QCD`, val      | `QCD_0280.root`—`QCD_0349.root`       | 70  | 7M    |
-| `QCD`, test     | `QCD_0350.root`—`QCD_0419.root`       | 70  | 7M    |
+| **`Res2P`, train**  | `Res2P_0000.parquet`—`Res2P_0199.parquet`   | **200** | **20M**   |
+| `Res2P`, val    | `Res2P_0200.parquet`—`Res2P_0249.parquet`   | 50  | 5M    |
+| `Res2P`, test   | `Res2P_0250.parquet`—`Res2P_0299.parquet`   | 50  | 5M    |
+| **`Res34P`, train** | `Res34P_0000.parquet`—`Res34P_0859.parquet` | **860** | **86M**   |
+| `Res34P`, val   | `Res34P_0860.parquet`—`Res34P_1074.parquet` | 215 | 21.5M |
+| `Res34P`, test  | `Res34P_1075.parquet`—`Res34P_1289.parquet` | 215 | 21.5M |
+| **`QCD`, train**    | `QCD_0000.parquet`—`QCD_0279.parquet`       | **280** | **28M**   |
+| `QCD`, val      | `QCD_0280.parquet`—`QCD_0349.parquet`       | 70  | 7M    |
+| `QCD`, test     | `QCD_0350.parquet`—`QCD_0419.parquet`       | 70  | 7M    |
 
 
 ### Quick dive into JetClass-II
@@ -57,7 +57,7 @@ Here are some visualization of jets marked with the top-5 probability scores int
 
 The dataset is generated using MadGraph + Pythia + Delphes. 
 
-During the Delphes (fast simulation) step, the pileup (PU) effect, with an average of 50 PU interactions, is emulated to mimic the realistic LHC collision environment. The PUPPI algorithm is then applied to remove the PU, correcting the E-flow objects used to cluster jets. This distinguishes it from the original JetClass dataset. The Delphes card can be found in the [`jetclass2-generation`](https://github.com/jet-universe/jetclass2_generation) (TBA) repository.
+During the Delphes (fast simulation) step, the pileup (PU) effect, with an average of 50 PU interactions, is emulated to mimic the realistic LHC collision environment. The PUPPI algorithm is then applied to remove the PU, correcting the E-flow objects used to cluster jets. This distinguishes it from the original JetClass dataset. The Delphes card can be found in the [`jetclass2-generation`](https://github.com/jet-universe/jetclass2_generation) repository.
 
 The complete generation script (the one-stop MadGraph + Pythia + Delphes production) and the n-tuplizer script are provided in the [`jetclass2-generation`](https://github.com/jet-universe/jetclass2_generation) repository to facilitate reproducibility.
 
@@ -161,13 +161,14 @@ For instructions on setting up Miniconda and installing PyTorch, refer to the [`
 
 ### Download dataset
 
-Download the JetClass-II dataset from [[Zenodo]]() (TBA) and ensure that all ROOT files are accessible from:
+Download the JetClass-II dataset from [[HuggingFace]](https://huggingface.co/datasets/jet-universe/jetclass2).
+The training and validation files are used in this work, while the test files are not used.
+
+Ensure that all data files are accessible from:
 
 ```bash
-./datasets/JetClassII/Pythia/{Res2P,Res34P,QCD}_*.root
+./datasets/JetClassII/Pythia/{Res2P,Res34P,QCD}_*.parquet
 ```
-
-The required data files for training and validation is shown in the [table](#data-packing). The test data is not used in this work.
 
 ### Training
 
@@ -185,7 +186,7 @@ The required data files for training and validation is shown in the [table](#dat
 
  > **Note:** Depending on your machine and GPU configuration, additional settings may be useful. Here are a few examples:
  > - Enable PyTorch's DDP for parallel training, e.g., `CUDA_VISIBLE_DEVICES=0,1,2,3 DDP_NGPUS=4 ./train_sophon.sh train --start-lr 2e-3` (the learning rate should be scaled according to `DDP_NGPUS`).
- > - Configure the number of data loader workers, the fetch step for loading each ROOT file, and the dataset split number to alleviate memory burden. Example command: `./train_sophon.sh train --num-workers 8 --fetch-step 0.02 --data-split-num 4`.
+ > - Configure the number of data loader workers and the number of splits for the entire dataset. The script uses the default configuration `--num-workers 5 --data-split-num 200`, which means there are 5 workers, each responsible for processing 1/5 of the data files and reading the data synchronously; the data assigned to each worker is split into 200 parts, with each worker sequentially reading 1/200 of the total data in order.
 
 **Step 3** (optional): Convert the model to ONNX.
 
@@ -219,16 +220,5 @@ If you use the JetClass-II dataset or the Sophon model, please cite:
     primaryClass = "hep-ph",
     month = "5",
     year = "2024"
-}
-
-@dataset{JetClassII,
-    author       = "Li, Congqiao and Agapitos, Antonios and Drews, Jovin and Duarte, Javier and Fu, Dawei and Gao, Leyun and Kansal, Raghav and Kasieczka, Gregor and Moureaux, Louis and Qu, Huilin and Suarez, Cristina Mantilla and Li, Qiang",
-    title        = "...",
-    month        = "...",
-    year         = "...",
-    publisher    = "Zenodo",
-    version      = "1.0.0",
-    doi          = "...",
-    url          = "..."
 }
 ```
